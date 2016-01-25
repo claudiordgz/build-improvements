@@ -1,0 +1,32 @@
+{
+  "name": "build-improvements",
+  "version": "0.0.1",
+  "description": "Build Improvements over a vanilla repository using Web Tools, Pros/Cons",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claudiordgz/build-improvements.git"
+  },
+  "keywords": [
+    "revealjs",
+    "javascript",
+    "html5"
+  ],
+  "author": "claudiordgz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/claudiordgz/build-improvements/issues"
+  },
+  "homepage": "https://github.com/claudiordgz/build-improvements#readme",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "reveal.js": "https://github.com/hakimel/reveal.js/tarball/3.2.0",
+    "script-loader": "^0.6.1",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.12"
+  }
+}
