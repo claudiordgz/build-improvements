@@ -1,11 +1,11 @@
 
-section(data-transition="slide")
+section
     h1 Build Improvements
     h2 Workflow for Newstalk and Methode
     h3 Questions
     h4 claudio.rdgz@gmail.com
 
-section(data-transition="slide")
+section
     section
         h2 Module Loading
         h3 Module
@@ -14,13 +14,13 @@ section(data-transition="slide")
         h2 The current state of Newstalk
         .container
             .row
-                .col-md-4
+                .col-xs-4
                     img(id="newstalk-dependencies")
-                .col-md-8
+                .col-xs-8
                     .left-align.
                         We have several javascript files for a relatively small project in Newstalk,
                         the problem with this approach is that We must document the scope of things.
-                    ul
+                    ul.left-list__padding
                         li Does the file belong to the page?
                         li Higher level?
                         li Is it a module or some utility functions to use all around?
@@ -29,23 +29,27 @@ section(data-transition="slide")
         .container
             .row
                 .col-md-12
-                    img(id="newstalk-footer")
+                    img(id="newstalk-footer", style='max-width:750px;')
             .row
                 .col-md-12
-                    .left-align.
-                        We don't know which Javascript file is using what without reading the whole code.
+                    p We don't know which Javascript file is using what without reading the whole code.
     section
         h2 Requests
         p Modules should be small because it is easier to pick up, extend, and find bugs in a small module.
         p But loading many modules through HTTP-Requests is slow.
         p Bundling modules reduces the amount of necessary HTTP-Requests to load our app.
-section(data-transition="slide")
+
+section
     section
-        h2 What are the famous modules in Javascript
+        h2 What are the famous types of modules in Javascript
         h3 RequireJS vs Browserify
+        p.
+            NOTE: There modules are concepts the Web agreed upon based on famous
+            design patterns like AMD pattern and Revealing Module Pattern, they
+            are not Frameworks.
 
     section
-        h2 RequireJS is based on a standard
+        h2 RequireJS
         p Asynchronous Module Definition (AMD) style modules
         pre
             code.hjs.javascript.
@@ -76,13 +80,15 @@ section(data-transition="slide")
                 .col-md-6
                     p The Bad
                     ul
-                        li AMD is old school for javascript standards, plus there is something simpler to use
-                        li A lot is possible, but everything requires massive configuration
-                        li Not that scalable, adding stuff to big modules becomes tracking down dependencies
+                        li It is not simple to define
+                        li Massive configuration for changes
+                        li Does not scale
     section
         h2 Browserify
         p Based on CommonJS style modules, which came before AMD, but were not supported by all browsers at the time.
-        h3 DISCLAIMER: It's what we used on LSP, it is great
+        h3
+            p.custom-font.color--red.
+                It is used on Last Songs Player Front End
         pre
             code.hjs.javascript.
                 var $ = require('jquery');
@@ -120,7 +126,7 @@ section(data-transition="slide")
             Both solutions get the job done well, but there are rough edges here
             and there.
         p Having CommonJS modules does not solve the need for async modules.
-section(data-transition="slide")
+section
     h2 Requirements for a good bundler
     .container
         .row
@@ -137,7 +143,7 @@ section(data-transition="slide")
                     li Deliver changes to modules instantly.
                     li Importing dependencies into your modules should be easy.
                     li Minimal configuration / processing scripts.
-section(data-transition="slide")
+section
     h2 Webpack
     h3 DISCLAIMER:  Newspaper is using it on the 512 project
     h3 and this presentation too!

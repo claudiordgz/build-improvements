@@ -15,11 +15,12 @@ module.exports = {
             { test: require.resolve("jquery"), loader: "imports?jQuery=jquery" },
             { test: /\.jade$/, loader: "html!jade-html"},
             { test: /\.css$/, loader: "style!css"},
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
+            { test: /\.scss$/, loaders: ["style", "css", "sass"] }
         ],
     },
     resolve: {
-        extensions: ['', '.js', '.jade']
+        extensions: ['', '.js', '.jade', '.scss']
     },
     plugins: [
         new webpack.ProvidePlugin({

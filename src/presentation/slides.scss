@@ -1,0 +1,20 @@
+.container {
+    & .left-align {
+        text-align: justify;
+        padding-left: 50px;
+        padding-bottom: 20px;
+        font-size: 0.8em;
+    }
+
+    & .left-list__padding {
+        padding-left: 50px;
+        font-size: 0.8em;
+    }
+}
+
+.custom-font {
+    &.color--red {
+        color: #8b211e;
+    }
+}
+
