@@ -20,7 +20,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['', '.js', '.jade', '.scss']
+        extensions: ['', '.js', '.jade']
     },
     plugins: [
         new webpack.ProvidePlugin({

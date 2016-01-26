@@ -10,11 +10,23 @@
         padding-left: 50px;
         font-size: 0.8em;
     }
+
+    &.background--gray {
+        background-color: #2D2D2D;
+    }
 }
 
 .custom-font {
     &.color--red {
         color: #8b211e;
     }
+    &.color--blue{
+        color: #61DAFB;
+    }
+    &.color--green{
+        color: #31B500;
+    }
+    &.smaller-font {
+        font-size: 0.8em;
+    }
 }
-
