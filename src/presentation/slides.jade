@@ -1,11 +1,11 @@
 
-section
+section(data-transition="slide")
     h1 Build Improvements
     h2 Workflow for Newstalk and Methode
     h3 Questions
     h4 claudio.rdgz@gmail.com
 
-section
+section(data-transition="slide")
     section
         h2 Module Loading
         h3 Module
@@ -34,166 +34,113 @@ section
                 .col-md-12
                     .left-align.
                         We don't know which Javascript file is using what without reading the whole code.
-
-section
-    h2 About me
-
-    h5 Name
-    p Reto Schläpfer
-
-    h5 Work
-    p React.js/Flux & Finance related backend stuff in Python at #[i Bluevalor AG]
-
-    h5 Blog
-    p www.code-experience.com
-
-    h5 Twitter
-    p: i @Retolements
-
-    h5 GitHub
-    p: i Retozi
-
-    aside.
-        blabla
-
-
-section
-    h2 Why do we need a bundler?
-
-    div.fragment
-        p Because modules should be small, and loading many modules through HTTP-Requests is slow.
-
+    section
+        h2 Requests
+        p Modules should be small because it is easier to pick up, extend, and find bugs in a small module.
+        p But loading many modules through HTTP-Requests is slow.
         p Bundling modules reduces the amount of necessary HTTP-Requests to load our app.
+section(data-transition="slide")
+    section
+        h2 What are the famous modules in Javascript
+        h3 RequireJS vs Browserify
 
+    section
+        h2 RequireJS is based on a standard
+        p Asynchronous Module Definition (AMD) style modules
+        pre
+            code.hjs.javascript.
+                define([
+                  'jquery',
+                  'underscore',
+                  'backbone',
+                  'router',
+                ], function($, _, Backbone, Router){
+                  var initialize = function(){
+                    Router.initialize();
+                  }
 
+                  return {
+                    initialize: initialize
+                  };
+                });
 
-section
+    section
+        h2 RequireJS
+        .container
+            .row
+                .col-md-6
+                    p The Good
+                    ul
+                        li It's been around
+                        li Designed for async loading
+                .col-md-6
+                    p The Bad
+                    ul
+                        li AMD is old school for javascript standards, plus there is something simpler to use
+                        li A lot is possible, but everything requires massive configuration
+                        li Not that scalable, adding stuff to big modules becomes tracking down dependencies
+    section
+        h2 Browserify
+        p Based on CommonJS style modules, which came before AMD, but were not supported by all browsers at the time.
+        h3 DISCLAIMER: It's what we used on LSP, it is great
+        pre
+            code.hjs.javascript.
+                var $ = require('jquery');
+                var _ = require('lodash');
+                var backbone = require('backbone');
+                var router = require('Router');
+
+                  var initialize = function(){
+                    Router.initialize();
+                  }
+
+                module.exports = initialize;
+    section
+        h2 Browserify
+        .container
+            .row
+                .col-md-6
+                    h2 The Good
+                    ul
+                        li Use npm / node.js libraries
+                        li.
+                            Plays well with Gulp/Grunt. => powerful processing strategies.
+                        li CommonJS syntax is better
+                .col-md-6
+                    h2 The Bad
+                    ul
+                        li you need Gulp/Grunt and plugins for instant dev rebuilds.
+                        li.
+                            Default: bundling into a single file. Async loading & multiple bundles
+                            possible, but must be done manually.
+    section
+        h2 Conclusion
+        p When loading AMD modules it is important to keep track of the availability of the modules
+        p.
+            Both solutions get the job done well, but there are rough edges here
+            and there.
+        p Having CommonJS modules does not solve the need for async modules.
+section(data-transition="slide")
     h2 Requirements for a good bundler
-
-
-section
-    h2 For production
-
-    p: i A bundling strategy that makes your app load quickly:
-
-    p -> Deliver modules that are needed at the same time in one HTTP-Request.
-
-    p -> Deliver independent modules seperately.
-
-    p -> Optimize size of bundles and their caching.
-
-
-section
-    h2 For Development
-
-    p Deliver changes to modules instantly.
-
-    p Importing dependencies into your modules should be easy.
-
-    p Minimal configuration / processing scripts.
-
-
-section
-    h2 RequireJS vs Browserify
-
-
-section
-    h2 RequireJS
-
-    p AMD style modules
-
-    pre
-        code.hljs.javascript.
-            define([
-              'jquery',
-              'underscore',
-              'backbone',
-              'router',
-            ], function($, _, Backbone, Router){
-              var initialize = function(){
-                Router.initialize();
-              }
-
-              return {
-                initialize: initialize
-              };
-            });
-
-section
-    h2 RequireJS: The Good
-
-    ul
-        li Battle proven
-
-        li Asynchronous loading in the core (default in dev-mode)
-
-section
-    h2 RequireJS: The Bad
-
-    ul
-        li AMD is out, CommonJS is in (npm EVERYTHING)
-
-        li A lot is possible, but everything requires massive configuration
-
-        li Dev-mode doesn't scale
-
-
-section
-    h2 Browserify
-
-    p CommonJS style modules
-
-    pre
-        code.hjs.javascript.
-
-            var $ = require('jquery');
-            var _ = require('lodash');
-            var backbone = require('backbone');
-            var router = require('Router');
-
-              var initialize = function(){
-                Router.initialize();
-              }
-
-            module.exports = initialize;
-
-section
-
-    h2 Browserify: The Good
-
-    li Use npm / node.js libraries
-
-    li.
-        Plays well with Gulp/Grunt. => powerful processing strategies.
-
-    li CommonJS syntax is better
-
-
-
-section
-    h2 Browserify: The Bad
-
-    li you need Gulp/Grunt and plugins for instant dev rebuilds.
-
-    li.
-        Default: bundling into a single file. Async loading & multiple bundles
-        possible, but must be done manually.
-
-
-section
-
-    h2 Conclusion
-
-    p Internet Consensus: Browserify > RequireJS for most of the cases
-
-    p.
-        Both solutions get the job done well, but there are rough edges here
-        and there.
-
-
-section
-
+    .container
+        .row
+            .col-md-6
+                h2 Production
+                ul
+                    li bundling strategy that makes your app load quickly:
+                    li Deliver modules that are needed at the same time in one HTTP-Request.
+                    li Deliver independent modules separately.
+                    li Optimize size of bundles and their caching.
+            .col-md-6
+                h2 Development
+                ul
+                    li Deliver changes to modules instantly.
+                    li Importing dependencies into your modules should be easy.
+                    li Minimal configuration / processing scripts.
+section(data-transition="slide")
     h2 Webpack
+    h3 DISCLAIMER:  Newspaper is using it on the 512 project
+    h3 and this presentation too!
 
     p Instagram/Facebook hypes it, Yahoo uses it as well.
 
