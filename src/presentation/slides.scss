@@ -1,32 +1,67 @@
 .container {
-    & .left-align {
-        text-align: justify;
-        padding-left: 50px;
-        padding-bottom: 20px;
-        font-size: 0.8em;
-    }
+  & .left-align {
+    text-align: justify;
+    padding-left: 50px;
+    padding-bottom: 20px;
+    font-size: 0.8em;
+  }
 
-    & .left-list__padding {
-        padding-left: 50px;
-        font-size: 0.8em;
-    }
+  & .left-list__padding {
+    padding-left: 50px;
+    font-size: 0.8em;
+  }
 
-    &.background--gray {
-        background-color: #2D2D2D;
-    }
+  &.background--gray {
+    background-color: #2D2D2D;
+  }
 }
 
 .custom-font {
-    &.color--red {
-        color: #8b211e;
+  &.color--red {
+    color: #8b211e;
+  }
+  &.color--blue{
+    color: #61DAFB;
+  }
+  &.color--green{
+    color: #31B500;
+  }
+  &.smaller-font {
+    font-size: 0.8em;
+  }
+}
+
+.smaller-font {
+  & p {
+    font-size: 0.8em;
+  }
+}
+
+.custom-images {
+  position: relative;
+
+  & .static-height {
+    height: 300px;
+  }
+
+  & .no-format {
+
+    & img {
+      box-shadow: none;
+      border: none;
     }
-    &.color--blue{
-        color: #61DAFB;
+
+    & .positioning {
+      position:absolute;
+      top:0;
+      bottom:0;
+      left: 0;
+      margin:auto;
     }
-    &.color--green{
-        color: #31B500;
+
+    #top-photo-100p {
+      height: 500px;
     }
-    &.smaller-font {
-        font-size: 0.8em;
-    }
+
+  }
 }

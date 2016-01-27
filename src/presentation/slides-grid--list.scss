@@ -1,0 +1,106 @@
+.custom-images {
+  & #grid--list {
+    height: 580px;
+  }
+
+  & .grid--list {
+    $left-margin--main-container: 170px;
+    $left-margin__right-rail: 585px;
+
+    &.box__green {
+      position: absolute;
+      top: 41px;
+      left: $left-margin--main-container;
+      width: 411px;
+      height: 140px;
+      background-color: rgba(0,255,0, 0.5);
+    }
+
+    &.box__red {
+      position: absolute;
+      top: 181px;
+      left: $left-margin--main-container;
+      width: 411px;
+      height: 418px;
+      background-color: rgba(255,0,0, 0.5);
+    }
+    $first-container-y: 222px;
+    &.one {
+      position: absolute;
+      top: $first-container-y;
+      left: $left-margin--main-container;
+    }
+    &.two {
+      position: absolute;
+      top: $first-container-y + (76px);
+      left: $left-margin--main-container;
+    }
+    &.three {
+      position: absolute;
+      top: $first-container-y + (76px * 2);
+      left: $left-margin--main-container;
+    }
+    &.four {
+      position: absolute;
+      top: $first-container-y + (76px * 3);
+      left: $left-margin--main-container;
+    }
+    &.five {
+      position: absolute;
+      top: $first-container-y + (76px * 4);
+      left: $left-margin--main-container;
+    }
+
+    &.box__purple {
+      width: 411px;
+      height: 74px;
+      background-color: rgba(200,0,200, 0.4);
+    }
+
+    &.right {
+      &--container {
+        position: absolute;
+        top: 2px;
+        left: $left-margin__right-rail;
+      }
+
+      $extra-margin: 5px;
+      $corrected-margin:  $left-margin__right-rail + $extra-margin;
+      &--one {
+        position: absolute;
+        top: 17px;
+        height: 29px;
+        left: $corrected-margin;
+      }
+      &--two {
+        position: absolute;
+        top: 48px;
+        height: 171px;
+        left: $corrected-margin;
+      }
+      &--three {
+        position: absolute;
+        top: 223px;
+        height: 177px;
+        left: $corrected-margin;
+      }
+      &--four {
+        position: absolute;
+        top: 404px;
+        height: 153px;
+        left: $corrected-margin;
+      }
+    }
+
+    &.box__yellow {
+      width: 210px;
+      height: 596px;
+      background-color: rgba(255,255,0, 0.5);
+    }
+
+    &.box__orange {
+      width: 202px;
+      background-color: rgba(255,150,0, 0.5);
+    }
+  }
+}

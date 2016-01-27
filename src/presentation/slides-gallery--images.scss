@@ -1,0 +1,44 @@
+.custom-images {
+  & .gallery--images {
+    &.box__purple {
+      width: 12px;
+      height: 18px;
+      background-color: rgba(200,0,200, 0.4);
+    }
+    $top-margin: 78px;
+    $left-margin: 680px;
+    $offset: 17px;
+
+    &.one {
+      position: absolute;
+      top: $top-margin;
+      left: $left-margin;
+    }
+    &.two {
+      position: absolute;
+      top: $top-margin;
+      left: $left-margin + $offset;
+    }
+    &.three {
+      position: absolute;
+      top: $top-margin;
+      left: $left-margin + ($offset * 2);
+    }
+    &.four {
+      position: absolute;
+      top: $top-margin;
+      left: $left-margin + ($offset * 3);
+    }
+    &.five {
+      position: absolute;
+      top: $top-margin;
+      left: $left-margin + ($offset * 4);
+    }
+
+    &.six {
+      position: absolute;
+      top: $top-margin;
+      left: $left-margin + ($offset * 5);
+    }
+  }
+}

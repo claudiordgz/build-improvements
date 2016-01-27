@@ -23,7 +23,6 @@ require('bootstrap-loader');
 // Entry point for Slides
 require('./presentation/entry-point.js');
 
-
 Reveal.initialize({
     controls: true,
     progress: true,
