@@ -652,7 +652,7 @@ section
         img(id="newstalk-component")
   section
     h4 And its HTML
-    h4 Without including the thousands of JS and SASS behind it
+    h4 Without including the thousands of lines of JS and SASS behind it
     pre(style="width:125%; font-size: 0.40em; margin-left: -12%;")
       code(style="max-height: 600px;").hljs.html.
         &lt;li class="story-list--item row">
@@ -711,7 +711,7 @@ section
 
   section
     h4 Let's look at a complex Newstalk Component
-    h4 Without including the thousands of JS and SASS behind it
+    h4 Without including the thousands of lines of JS and SASS behind it
     pre(style="width:125%; font-size: 0.40em; margin-left: -12%;")
       code(style="max-height: 600px;").hljs.html.
         &lt;div class="podcaster--container podcaster--card__extra-margin">
@@ -1036,16 +1036,6 @@ section
       Any component should be no different than any native DOM elements
 
   section
-    h2 Web Components and Flexibility
-    blockquote(cite="http://www.contentmarketingworld.com/speaker-video-jay-baer/")
-      |   95 percent of dissatisfied customers never mention it to the business they’re dissatisfied with.
-    blockquote(cite="http://www.contentmarketingworld.com/speaker-video-jay-baer/")
-      |   Only 5 percent of unhappy customers complain. So if someone is raising their hand, you should listen.
-      footer
-        cite
-          a(href="http://www.contentmarketingworld.com/speaker-video-jay-baer/") Jay Baher
-
-  section
     h3 TL;DR
     p.
       We need a way to add Metadata on the backend as follows
@@ -1067,14 +1057,30 @@ section
       But it will look GORGEOUS
 
 section
-  h2 Testing the front end
-  .smaller-font
+  section
+    h2 Unit Testing the front end
+    .smaller-font
+      p.
+        The front end is a weird monster, on one end it has massively less code than
+        any respectable back end codebase.
+      p.
+        On another, as soon as you go 'out of the box' and start customizing things
+        it grows exponentially.
+      p.
+        And in any given moment the look & feel will be outdated, and could start bleeding
+        users.
+  section
+    h3 Front end != Back end
     p.
-      The front end is a weird monster, on one end it has massively less code than
-      any respectable back end codebase.
-    p.
-      On another, as soon as you go 'out of the box' and start customizing things
-      it grows exponentially.
-    p.
-      And in any given moment the look & feel will be outdated, and could start bleeding
-      users.
+      A test on the backend it's simpler, We test if something came from an endpoint,
+      if a Module is doing what it's doing, if the error checks are in place for something
+      catastrophic to happen.
+  section
+    h3 Behaviors
+    ul
+      li A click enlarges an audio or video player, starts playing an assets
+      li A gallery has X elements
+      li A Controller receives a callback, changes some things in the callback
+      li Test some styles, like an svg icon changing it's color
+      li Test that the a widget renders all of it's things correctly using a Mock API Request
+      li Test that a piece Inherits properly some properties, like a custom color or font
