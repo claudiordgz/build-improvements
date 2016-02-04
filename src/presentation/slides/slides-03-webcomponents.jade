@@ -1,0 +1,596 @@
+section
+  section
+    h2 Web Components
+    p.
+      Reusable UI Widgets created using open Web Technology
+    h3 They consists of these four technologies:
+    ul
+      li Custom Elements
+      li HTML Templates
+      li Shadow DOM
+      li HTML Imports
+  section
+    h2 Server side "rendering"
+    p.
+      The server delivers all the data so that
+      your App or Website doesn't need an extra GET
+      request on load
+    ul
+      li Styles
+      li Events
+      li Content
+      li
+        b SEO Metadata
+  section
+    h2 Do we even have 'components'?
+    .custom-images
+      .no-format
+        img(id="grid--list")
+        span(data-fragment-index="0").fragment.fade-in
+          .grid--list.box__green
+        span(data-fragment-index="1").fragment.fade-in
+          .grid--list.box__red
+        span(data-fragment-index="2").fragment.fade-in
+          .grid--list.one.box__purple
+        span(data-fragment-index="2").fragment.fade-in
+          .grid--list.two.box__purple
+        span(data-fragment-index="2").fragment.fade-in
+          .grid--list.three.box__purple
+        span(data-fragment-index="2").fragment.fade-in
+          .grid--list.four.box__purple
+        span(data-fragment-index="2").fragment.fade-in
+          .grid--list.five.box__purple
+        span(data-fragment-index="3").fragment.fade-in
+          .grid--list.right--container.box__yellow
+        span(data-fragment-index="4").fragment.fade-in
+          .grid--list.right--one.box__orange
+        span(data-fragment-index="4").fragment.fade-in
+          .grid--list.right--two.box__orange
+        span(data-fragment-index="4").fragment.fade-in
+          .grid--list.right--three.box__orange
+        span(data-fragment-index="4").fragment.fade-in
+          .grid--list.right--four.box__orange
+
+  section
+    h2 What about events?
+    .custom-images
+      .no-format
+        img(id="gallery--images")
+        span(data-fragment-index="0").fragment.fade-in
+          .gallery--images.one.box__purple
+        span(data-fragment-index="0").fragment.fade-in
+          .gallery--images.two.box__purple
+        span(data-fragment-index="0").fragment.fade-in
+          .gallery--images.three.box__purple
+        span(data-fragment-index="0").fragment.fade-in
+          .gallery--images.four.box__purple
+        span(data-fragment-index="0").fragment.fade-in
+          .gallery--images.five.box__purple
+        span(data-fragment-index="0").fragment.fade-in
+          .gallery--images.six.box__purple
+  section
+    h2 Let's look at the current markup
+    .custom-images
+      .no-format
+        img(id="top-photo-100p")
+  section
+    h2 Let's look at the current HTML
+    pre(style="width:125%; font-size: 0.40em; margin-left: -12%;")
+      code(style="max-height: 600px;").hljs.html.
+        &lt;div class="cmCol6" data-vr-zone="Automatic List 1.0.14585745">
+          &lt;h3 class="cmModuleHeader">K99.1FM Concerts&lt;/h3>
+          &lt;!-- requires javascript/rotator.js -->
+          &lt;!-- requires javascript/modernizr.js -->
+
+          &lt;div class="cmTeaseListStd">
+              &lt;div class="cmTease cmClearfix cmTeaseCol6 cmTeasePhotoTop" data-vr-zone="Story 1.0.13116704" data-vr-contentbox="">
+            &lt;!-- requires javascript/jquery.ui.dialog.min.js -->
+            &lt;!-- requires javascript/jquery.cmlightbox.js -->
+            &lt;!-- requires javascript/cmwidgets.js -->
+            &lt;!-- requires javascript/modernizr.js -->
+            &lt;div class="cmTeasePhoto cmRelatedImage">
+                &lt;a href="/events/concerts/country/k99-1fm-presents-country-concert-3DsIai7qB0xHSJJw0IjrPN/page.html">&lt;img src="/ra/widescreen/CMGT/Dayton/Radio/K99Online/Content/Images/12189085_10153274299317921_8161748478616502139_n.jpg" class="cmDarkBoxShadow cmPhotoBorderWhite" title="
+                    K99.1FM Presents Country Concert '16
+                 " alt="
+                    K99.1FM Presents Country Concert '16
+                 " height="324" width="615">&lt;/a>
+
+                  &lt;/div>
+            &lt;h2>
+              &lt;a href="/events/concerts/country/k99-1fm-presents-country-concert-3DsIai7qB0xHSJJw0IjrPN/page.html">
+                    K99.1FM Presents Country Concert '16
+                 &lt;/a>
+            &lt;/h2>
+            &lt;div class="cmTeaseSummary">
+              &lt;p>It's the BIGGEST party of the Summer and you know you want to be there. Join us at Country Concert '16 in Fort Loramie, Ohio for 3 days you'll never forget July6th, 7th, and 8th. This year's incredible lineup features:&lt;/p>&lt;/div>
+            &lt;p class="cmTeaseShare">&lt;/p>
+
+            &lt;/div>&lt;/div>
+          &lt;div class="cmTeaseListMore cmTeaseListStdMore">
+            &lt;a href="http://www.fe34.k99online.com/list/news/national/2015-year-review/aM35/">&lt;span>&gt;&nbsp;&lt;/span>More
+            &lt;/a>
+          &lt;/div>
+        &lt;/div>
+  section
+    h2 Let's look at the current JPTs
+    pre(style="width:125%; font-size: 0.40em; margin-left: -12%;")
+      code(style="max-height: 600px;").hljs.html.
+        // ------------------
+        // 100p-top-photo.jpt
+        // ------------------
+        &lt;p:currentObject loidEx = "loid"/>
+        &lt;c:set var="col_tease_num" value="6"/>
+
+        &lt;div class="cmCol6" >
+          &lt;p:include url="/PortalConfig/radio-music-wired/jpt/story/tease/cmtease-photo-top.jpt" channel="${currentObject.channel}" >
+              &lt;p:param name="storyObject" value="${currentObject}" />
+              &lt;p:param name="cmTeaseCol" value="${col_tease_num}" />
+              &lt;p:param name="img_height" value="324" />
+              &lt;p:param name="img_width" value="615" />
+          &lt;/p:include>
+        &lt;/div>
+
+        // ------------------
+        // cmtease-photo-top.jpt
+        // ------------------
+        &lt;%-- &lt;p:getContext var="storyObject" /> --%>
+        &lt;p:object  webObject="${cacheScope.storyObject}" content = "data" loidEx="loid" />
+        &lt;p:url webObject="${cacheScope.storyObject}" var="storyUrl" />
+        &lt;p:url xvalue="$data//photo/@fileref" var="imgUrl" alias='widescreen' />
+        &lt;p:out xvalue="$data//headline" var="title" />
+
+        &lt;div class="cmTease cmClearfix cmTeaseCol${cacheScope.cmTeaseCol} cmTeasePhotoTop" data-vr-zone="Story ${loid}" data-vr-contentbox="">
+            &lt;!-- requires javascript/jquery.ui.dialog.min.js -->
+            &lt;!-- requires javascript/jquery.cmlightbox.js -->
+            &lt;!-- requires javascript/cmwidgets.js -->
+            &lt;!-- requires javascript/modernizr.js -->
+            &lt;x:if select="$data//photo/@fileref">
+              &lt;div class="cmTeasePhoto cmRelatedImage">
+                &lt;a
+                  href="${storyUrl}">&lt;img
+                  src="${imgUrl}"
+                  class="cmDarkBoxShadow cmPhotoBorderWhite"
+                  title="${title}"
+                  alt="${title}" height="${cacheScope.img_height}" width="${cacheScope.img_width}">&lt;/a>
+
+                  &lt;c:if test="${cacheScope.cmTeaseCol == '16'}">
+                    &lt;p class="cmTeasePhotoCredit">
+                      &lt;a rel="nofollow" href="/staff/vino-wong/"> Vino Wong&lt;/a>
+                    &lt;/p>
+                  &lt;/c:if>
+              &lt;/div>
+            &lt;/x:if>
+            &lt;h2>
+              &lt;a href="${storyUrl}">${title}&lt;/a>
+            &lt;/h2>
+            &lt;div class="cmTeaseSummary">
+              &lt;p:out xvalue="$data//text/p[1]" xslt="/PortalConfig/radio-music-wired/xslt/full.xslt" />
+            &lt;/div>
+            &lt;p class="cmTeaseShare">&lt;/p>
+
+            &lt;c:if test="${cacheScope.cmTeaseCol == '16'}">
+              &lt;div class="cmTeaseRelated">
+                &lt;span class="sprite iconListBullet">&nbsp;&lt;/span>&lt;a
+                  href="http://www.fe34.k99online.com/list/news/more-news-headlines/aJz4/">More
+                  News Headlines&lt;/a>&lt;br> &lt;span class="sprite iconListBullet">&nbsp;&lt;/span>&lt;a
+                  href="http://www.fe34.k99online.com/list/news/national/2015-year-review/aM35/">2015
+                  Year in Review&lt;/a>&lt;br>
+              &lt;/div>
+            &lt;/c:if>
+        &lt;/div>
+  section
+    h4 Let's look at a Newstalk Component
+    p NOTE: They're responsive now
+    .custom-images
+      .no-format
+        img(id="newstalk-component")
+  section
+    h4 And its HTML
+    h4 Without including the thousands of lines of JS and SASS behind it
+    pre(style="width:125%; font-size: 0.40em; margin-left: -12%;")
+      code(style="max-height: 600px;").hljs.html.
+        &lt;li class="story-list--item row">
+          &lt;div class="col-xs-5 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+            &lt;a href="#">
+            &lt;div class="story-list__image">
+              &lt;img class="img-fluid" itemprop="image" src=
+              "assets/images/story_list/1.png">
+              &lt;div class="global-photo-gradient">&lt;/div>
+            &lt;/div>&lt;/a>
+          &lt;/div>
+          &lt;div class=
+          "story-list--title col-xs-7 col-sm-8 col-md-8 col-lg-9 col-xl-9">
+            &lt;a href="#">
+            &lt;h4 class="global-xxs-h4 story-list--title-heading">New Orleans Mayor
+            Thanks Atlanta For Katrina Assistance&lt;/h4>&lt;/a>
+            &lt;div class="clearfix hidden-sm-up">&lt;/div>
+            &lt;div class=
+            "pull-left story-list--timestamp hidden-xs-down story-list--timestamp__red">
+            Updated: 5 min ago
+            &lt;/div>
+            &lt;div class="pull-left story-list--comments hidden-xs-down">
+              &lt;a href="#">&lt;span class="global-comments-callout">52&lt;/span>
+              Comments&lt;/a>
+            &lt;/div>
+          &lt;/div>
+          &lt;div class="hidden-lg-up clearfix">&lt;/div>
+          &lt;div class="div col-xs-12 hidden-sm-up">
+            &lt;div class="pull-left story-list--timestamp story-list--timestamp__red">
+              Updated: 5 min ago
+            &lt;/div>
+            &lt;div class="pull-left story-list--comments">
+              &lt;a href="#">&lt;span class="global-comments-callout">52&lt;/span>
+              Comments&lt;/a>
+            &lt;/div>
+          &lt;/div>
+          &lt;div class=
+          "story-list--description hidden-sm-down col-md-12 col-lg-9 col-xl-9">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel
+            finibus magna. Integer id posuere quam, sit amet suscipit lectus. Aliquam
+            condimentum quis nisl elementum fringilla. Duis quis quam purus. Praesent
+            ornare massa ac suscipit ornare. Morbi scelerisque, quam sit amet maximus
+            aliquet.
+          &lt;/div>
+          &lt;div class="col-xs-12">
+            &lt;div class="story-list--border-bottom">&lt;/div>
+          &lt;/div>
+        &lt;/li>
+
+  section
+    h4 Let's look at a complex Newstalk Component
+    p NOTE: Also fully responsive
+    .custom-images
+      .no-format
+        img(id="newstalk-podcast-player")
+
+  section
+    h4 Let's look at a complex Newstalk Component
+    h4 Without including the thousands of lines of JS and SASS behind it
+    pre(style="width:125%; font-size: 0.40em; margin-left: -12%;")
+      code(style="max-height: 600px;").hljs.html.
+        &lt;div class="podcaster--container podcaster--card__extra-margin">
+          &lt;div class=
+          "col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 podcaster--container--image">
+          &lt;img class="img-fluid" src="assets/images/podcast/neal-boortz.png">&lt;/div>
+          &lt;div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-9 podcast--description">
+            &lt;h2 class="podcast--description-title podcaster--description-title">
+              Neal Boortz&lt;/h2>
+            &lt;div class="podcast--show-tagline">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            &lt;/div>
+            &lt;div class="podcast--subscribe podcaster--subscribe">
+                  Subscribe&lt;i class=
+                  "fa fa-caret-down fa-lg podcast--subscribe-arrow">&lt;/i>
+                  &lt;ul class="podcast--subscribe-actions">
+                      &lt;li class="podcast--subscribe-action">iTunes&lt;/li>
+                      &lt;li class="podcast--subscribe-action">Yahoo&lt;/li>
+                      &lt;li class="podcast--subscribe-action">NewsGator&lt;/li>
+                      &lt;li class="podcast--subscribe-action">RSS&lt;/li>
+                      &lt;li class="podcast--subscribe-action">Other&lt;/li>
+                  &lt;/ul>
+              &lt;/div>
+              &lt;div class="podcaster--latest-podcast">
+                  Latest Podcast: 08.03.15
+              &lt;/div>
+              &lt;div class="podcast--player__container hidden-md-down" data-audio-src=
+              "http://cmgdtcdxardnew1.cmg.int/B-10768/assets/audio/NBC121115.mp3">
+                  &lt;div class="podcast--controls more-button" data-controls-state=
+                  "collapsed">
+                      &lt;div class="podcast--player player__margin-right">
+                          &lt;div class="audio-player" data-audio-id="lgNeal Boortz"
+                          data-player-state="init">
+                              &lt;div class="audio-player--play">
+                                  &lt;div class=
+                                  "audio-player--play-button audio-player--button__color">
+                                  &lt;div class=
+                                  "scaling-svg-container audio-player--ie-static-height">
+                                      &lt;!--?xml version="1.0" encoding="utf-8"?-->
+                                          &lt;svg style=
+                                          "enable-background:new 0 0 24 24;" version=
+                                          "1.1" viewbox="0 0 24 24" x="0px" xmlns=
+                                          "http://www.w3.org/2000/svg" y="0px">
+                                          &lt;style>
+                                          .st0{fill:#FFFFFF;}
+                                          &lt;/style>
+                                          &lt;g>
+                                              &lt;path d="M0 0h24v24H0z" fill="none">
+                                              &lt;/path>
+                                              &lt;path class="st0" d=
+                                              "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z">
+                                              &lt;/path>
+                                          &lt;/g>&lt;/svg>
+                                      &lt;/div>
+                                  &lt;/div>
+                              &lt;/div>
+                              &lt;div class="audio-player--pause">
+                                  &lt;div class=
+                                  "audio-player--pause-button audio-player--button__color">
+                                  &lt;div class=
+                                  "scaling-svg-container audio-player--ie-static-height">
+                                      &lt;!--?xml version="1.0" encoding="utf-8"?-->
+                                          &lt;svg style=
+                                          "enable-background:new 0 0 24 24;" version=
+                                          "1.1" viewbox="0 0 24 24" x="0px" xmlns=
+                                          "http://www.w3.org/2000/svg" y="0px">
+                                          &lt;style>
+                                          .st0{fill:#FFFFFF;}
+                                          &lt;/style>
+                                          &lt;g>
+                                              &lt;path d="M0 0h24v24H0z" fill="none">
+                                              &lt;/path>
+                                              &lt;path class="st0" d=
+                                              "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z">
+                                              &lt;/path>
+                                          &lt;/g>&lt;/svg>
+                                      &lt;/div>
+                                  &lt;/div>
+                              &lt;/div>
+                              &lt;div class="audio-player--controls">
+                                  &lt;span class=
+                                  "audio-player--progress regular-margin">&lt;span class="audio-player--progress-bar">
+                                  &lt;/span>&lt;/span>
+                                  &lt;p class=
+                                  "audio-player--progress-bar__no-background-text">
+                                  &lt;span class=
+                                  "audio-player--progress regular-margin">00:00:00 /
+                                  00:00:00&lt;/span>&lt;/p>
+                                  &lt;div class="audio-player--progress-bar__progress">
+                                      &lt;span class=
+                                      "audio-player--progress regular-margin">&lt;/span>
+                                      &lt;p class=
+                                      "audio-player--progress-bar__background-text hidden">
+                                      &lt;span class=
+                                      "audio-player--progress regular-margin">00:00:00
+                                      / 00:00:00&lt;/span>&lt;/p>
+                                  &lt;/div>
+                                  &lt;div class="audio-player--volume">
+                                      &lt;div class=
+                                      "audio-player--volume-progress__container">
+                                          &lt;input class=
+                                          "audio-player--volume-progress webkit-track"
+                                          max="100" min="0" type="range" value="50">
+                                      &lt;/div>
+                                      &lt;div class="audio-player--volume-button">
+                                          &lt;i class=
+                                          "fa fa-volume-down fa-station-color">&lt;/i>
+                                      &lt;/div>
+                                  &lt;/div>
+                              &lt;/div>
+                          &lt;/div>
+                      &lt;/div>
+                      &lt;div class="podcast--player--extra__more-button">
+                          &lt;div class="podcast--player--extra__more">
+                              &lt;a class="podcast--more-episodes">More Episodes&lt;/a>
+                          &lt;/div>
+                      &lt;/div>
+                  &lt;/div>
+              &lt;/div>
+          &lt;/div>
+          &lt;div class="col-xs-12">
+              &lt;div class="podcast--player__container hidden-lg-up" data-audio-src=
+              "http://cmgdtcdxardnew1.cmg.int/B-10768/assets/audio/NBC121115.mp3">
+                  &lt;div class="podcast--controls more-button" data-controls-state=
+                  "collapsed">
+                      &lt;div class="podcast--player player__margin-right">
+                          &lt;div class="audio-player" data-audio-id="mdNeal Boortz"
+                          data-player-state="init">
+                              &lt;div class="audio-player--play">
+                                  &lt;div class=
+                                  "audio-player--play-button audio-player--button__color">
+                                  &lt;div class=
+                                  "scaling-svg-container audio-player--ie-static-height">
+                                      &lt;!--?xml version="1.0" encoding="utf-8"?-->
+                                          &lt;svg style=
+                                          "enable-background:new 0 0 24 24;" version=
+                                          "1.1" viewbox="0 0 24 24" x="0px" xmlns=
+                                          "http://www.w3.org/2000/svg" y="0px">
+                                          &lt;style>
+                                          .st0{fill:#FFFFFF;}
+                                          &lt;/style>
+                                          &lt;g>
+                                              &lt;path d="M0 0h24v24H0z" fill="none">
+                                              &lt;/path>
+                                              &lt;path class="st0" d=
+                                              "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z">
+                                              &lt;/path>
+                                          &lt;/g>&lt;/svg>
+                                      &lt;/div>
+                                  &lt;/div>
+                              &lt;/div>
+                              &lt;div class="audio-player--pause">
+                                  &lt;div class=
+                                  "audio-player--pause-button audio-player--button__color">
+                                  &lt;div class=
+                                  "scaling-svg-container audio-player--ie-static-height">
+                                      &lt;!--?xml version="1.0" encoding="utf-8"?-->
+                                          &lt;svg style=
+                                          "enable-background:new 0 0 24 24;" version=
+                                          "1.1" viewbox="0 0 24 24" x="0px" xmlns=
+                                          "http://www.w3.org/2000/svg" y="0px">
+                                          &lt;style>
+                                          .st0{fill:#FFFFFF;}
+                                          &lt;/style>
+                                          &lt;g>
+                                              &lt;path d="M0 0h24v24H0z" fill="none">
+                                              &lt;/path>
+                                              &lt;path class="st0" d=
+                                              "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z">
+                                              &lt;/path>
+                                          &lt;/g>&lt;/svg>
+                                      &lt;/div>
+                                  &lt;/div>
+                              &lt;/div>
+                              &lt;div class="audio-player--controls">
+                                  &lt;span class=
+                                  "audio-player--progress regular-margin">&lt;span class="audio-player--progress-bar">
+                                  &lt;/span>&lt;/span>
+                                  &lt;p class=
+                                  "audio-player--progress-bar__no-background-text">
+                                  &lt;span class=
+                                  "audio-player--progress regular-margin">00:00:00 /
+                                  00:00:00&lt;/span>&lt;/p>
+                                  &lt;div class="audio-player--progress-bar__progress">
+                                      &lt;span class=
+                                      "audio-player--progress regular-margin">&lt;/span>
+                                      &lt;p class=
+                                      "audio-player--progress-bar__background-text hidden">
+                                      &lt;span class=
+                                      "audio-player--progress regular-margin">00:00:00
+                                      / 00:00:00&lt;/span>&lt;/p>
+                                  &lt;/div>
+                                  &lt;div class="audio-player--volume">
+                                      &lt;div class=
+                                      "audio-player--volume-progress__container">
+                                          &lt;input class=
+                                          "audio-player--volume-progress webkit-track"
+                                          max="100" min="0" type="range" value="50">
+                                      &lt;/div>
+                                      &lt;div class="audio-player--volume-button">
+                                          &lt;i class=
+                                          "fa fa-volume-down fa-station-color">&lt;/i>
+                                      &lt;/div>
+                                  &lt;/div>
+                              &lt;/div>
+                          &lt;/div>
+                      &lt;/div>
+                      &lt;div class="podcast--player--extra__more-button">
+                          &lt;div class="podcast--player--extra__more">
+                              &lt;a class="podcast--more-episodes">More Episodes&lt;/a>
+                          &lt;/div>
+                      &lt;/div>
+                  &lt;/div>
+              &lt;/div>
+          &lt;/div>
+        &lt;/div>
+  section
+    h2 Creating pretty and constantly evolving interfaces is a complex requirement
+
+  section
+    h2 The Music Site Refresh
+    p A project to refresh the UI
+
+
+  section
+    h3 Frameworks were born for the complex requirement
+    .container.custom-images
+      .row.no-format.static-height
+        .col-md-6
+          img(id="logo--react").positioning
+        .col-md-6
+          img(id="logo--polymer").positioning
+
+      .row
+        .col-md-6
+          p React
+          p Virtual DOM
+        .col-md-6
+          p Polymer
+          p Shadow DOM
+
+  section
+    h2 DOM
+    h5 Document Object Model
+    ul
+      li Programming interface for HTML, XML, and SVG documents (Handlers too)
+      li The DOM is what the browser renders
+    p.fragment.fade-in.
+      Basically a Tree of Nodes for you to play with through JS that the browser renders with your assets
+
+  section
+    h2 Shadow DOM
+    p.
+      The Shadow DOM is a browser feature, in which it can include a subtree to
+      the rendering part, but you won't see it in the main DOM.
+    p.
+      Cases in point
+    ul
+      li <code>&lt;input id="foo" type="range"></code>
+      li <code>&lt;video src="kool-aid-oh-yeah.mp4" autoplay controls>&lt;/video></code>
+      li <code>&lt;audio src="kumbaya.mp3">&lt;/audio></code>
+      li <code>&lt;a href="www.thetwilightzone.com">Link&lt;a></code>
+
+  section
+    h2 Polymer
+    p.
+      Polymer uses the Shadow DOM to allow you to create your own Custom HTML Component,
+      and allow the user of that component to use it as follows:
+    pre(style="width:100%; font-size: 0.40em;")
+      code(style="max-height: 600px;").hljs.html.
+        &lt;claudios-fabulous-swagifier>
+          &lt;user>John Doe&lt;/user>
+          &lt;birthdate>2000&lt;/birthdate>
+          &lt;bio>I have no swag because I'm too young to know better&lt;/bio>
+        &lt;/claudios-fabulous-swagifier>
+
+  section
+    h2 Polymer's Browser Support
+    .custom-images
+      .no-format
+        img(id="polymer-compatibility")
+
+  section
+    h2 React
+    p.
+      React uses its own abstraction of the HTML DOM. You delegate performance
+      to React (which is a good thing) when performing DOM operations.
+    p You would return
+    pre
+      code.hljs.html.
+        React.render(&lt;h1>Hello World&lt;/h1>, document.body);
+
+  section
+    h4 React used to have a list of Whitelist HTML elements
+    h3 They removed it!
+    pre
+      code.hljs.html.
+        React.render(
+          React.createElement(
+            &lt;claudios-fabulous-swagifier>, null
+            Hello World), document.body);
+
+  section
+    h3 React browser support
+    blockquote(cite="https://github.com/gaearon/react-dnd-html5-backend/commit/295805cbeecb1b7544de241a9e6a5ee4dd0e3134")
+      | We strive to support the evergreen browsers, Safari 7+, as well as IE11+.
+      | IE10 should also work, but DragLayer is fairly useless because IE10 doesn’t support
+      | pointer-events: none. We don’t officialy support IE9 and less.
+      footer
+        cite
+          a(href="https://github.com/gaearon/react-dnd-html5-backend/commit/295805cbeecb1b7544de241a9e6a5ee4dd0e3134") Dan Abramov
+
+  section
+    h2 Best Practices for Web Components
+    ul
+      li Small
+      li Extremely Encapsulated
+      li Stateless
+        ul
+          li Don't depend on anything
+      li Performant
+        ul
+          li The page will be as fast as our slowest component
+
+  section
+    h3.
+      Any component should be no different than any native DOM elements
+
+  section
+    h3 TL;DR
+    p.
+      We need a way to add Metadata on the backend as follows
+    pre(style="width:100%; font-size: 0.40em;")
+      code(style="max-height: 600px;").hljs.html.
+        &lt;top-photo-story itemscope itemtype="http://schema.org/MusicEvent">
+          &lt;link itemprop="url">{storyUrl}&lt;link>
+          &lt;thumbnail>{thumbnail}&lt;/user>
+          &lt;title itemprop="description">{description}&lt;/birthdate>
+          &lt;date>
+            &lt;start itemprop="startDate">{beginDate}&lt;start>
+            &lt;end itemprop="endDate">{endDate}&lt;end>
+          &lt;/date>
+        &lt;/top-photo-story>
+    p.
+      So that the front end can scale and likely become the
+      monstrosity required by Fully Responsive HTML
+    h2.fragment.fade-in.
+      But it will look GORGEOUS

@@ -32,6 +32,8 @@
     "jade": "^1.11.0",
     "jade-html-loader": "0.0.3",
     "jquery": "^2.2.0",
+    "jshint": "^2.9.1",
+    "jshint-loader": "^0.8.3",
     "node-sass": "^3.4.2",
     "resolve-url-loader": "^1.4.3",
     "reveal.js": "https://github.com/hakimel/reveal.js/tarball/3.2.0",

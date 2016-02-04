@@ -1,0 +1,90 @@
+section
+  section
+    h2 What are the famous types of modules in Javascript
+    h3 RequireJS vs Browserify
+    p.
+      NOTE: There modules are concepts the Web agreed upon based on famous
+      design patterns like AMD pattern and Revealing Module Pattern, they
+      are not Frameworks.
+
+  section
+    h2 RequireJS
+    p Asynchronous Module Definition (AMD) style modules
+    pre
+      code.hjs.javascript.
+        define([
+          'jquery',
+          'underscore',
+          'backbone',
+          'router',
+        ], function($, _, Backbone, Router){
+          var initialize = function(){
+            Router.initialize();
+          }
+
+          return {
+            initialize: initialize
+          };
+        });
+
+  section
+    h2 RequireJS
+    .container
+      .row
+        .col-md-6
+          p The Good
+          ul
+            li It's been around
+            li Designed for async loading
+        .col-md-6
+          p The Bad
+          ul
+            li It is not simple to define
+            li Massive configuration for changes
+            li Does not scale
+  section
+    h2 Browserify
+    p Based on CommonJS style modules, which came before AMD, but were not supported by all browsers at the time.
+    h3
+      p.custom-font.color--red.
+        It is used on Last Songs Player Front End
+    pre
+      code.hjs.javascript.
+        var $ = require('jquery');
+        var _ = require('lodash');
+        var backbone = require('backbone');
+        var router = require('Router');
+
+          var initialize = function(){
+            Router.initialize();
+          }
+
+        module.exports = initialize;
+  section
+    h2 Browserify
+    .container
+      .row
+        .col-md-6
+          h2 The Good
+          ul
+            li Use npm libraries
+            li.
+              Plays well with Gulp/Grunt
+            li CommonJS syntax scales
+        .col-md-6
+          h2 The Bad
+          ul
+            li You need a Script (npm)/Gulp/Grunt
+            li Build Tools require plugins of their own (besides the library)
+      .row
+        .col-md-12
+          ul
+            li Default: bundling into a single file.
+            li Async loading & multiple bundles must be done manually.
+  section
+    h2 Conclusion
+    p When loading AMD modules it is important to keep track of the availability of the modules
+    p.
+      Both solutions get the job done well, but there are rough edges here
+      and there.
+    p Having CommonJS modules does not solve the need for async modules.

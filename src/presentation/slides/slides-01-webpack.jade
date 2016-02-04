@@ -1,0 +1,334 @@
+section
+  section
+    h2 Requirements for a good bundler
+    .container.background--gray
+      .row
+        .col-md-6
+          h2 Production
+          ul.custom-font.smaller-font.color--blue
+            li Bundling strategy that makes your app load quickly:
+            li Deliver modules that are needed at the same time in one HTTP-Request.
+            li Deliver independent modules separately.
+            li Optimize size of bundles and their caching.
+        .col-md-6
+          h2 Development
+          ul.custom-font.smaller-font.color--green
+            li Deliver changes to modules instantly.
+            li Importing dependencies into your modules should be easy.
+            li Minimal configuration / processing scripts.
+  section
+    h2 Enter
+    img(id="webpack-logo", style="width:250px;border: none; box-shadow: none;")
+    h3.custom-font.color--red DISCLAIMER:  Newspaper uses it
+    h3.custom-font.color--blue and this presentation too!
+
+    p Instagram/Facebook/Yahoo also use it
+
+  section
+    h2 Definition style agnostic
+    p Supports AMD, CommonJS and ES6 modules
+    h2 Everything is a module
+    p Other bundlers only handle Javascript
+    p This presentation is bundling JADE, SCSS, CSS, Bootstrap, jQuery, RevealJS, Fonts, and Images.
+    p Webpack handles everything
+
+  section(data-state="white-background")
+    p Take the full dependency graph of all assets, and bundle them to your liking
+    img#what-is-webpack
+
+
+  section
+    h2 Bundling into one file is not enough
+    p If our app is big, you would like to split the assets into multiple files
+    p Maybe you need multiple pages
+    p Webpack will offer you powerful bundling strategies with minimal configuration
+
+  section
+    h2 Dev experience is great
+    p.
+      Webpack ships awesome dev-tools that provide instant rebuilds with
+      hot reload.
+
+  section
+    h2 How to use Webpack
+    pre
+      code.bash.
+        c@cox:~$ webpack
+    p or
+    pre
+      code.bash.
+        c@cox:~$ node_modules/.bin/webpack
+    p or
+    pre
+      code.bash.
+        c@cox:~$ node_modules/.bin/webpack --watch
+
+  section
+    h2 And your <code>webpack.config.js</code>
+    pre
+      code.hjs.javascript.
+        // ------------------
+        // webpack.config.js
+        // ------------------
+
+        module.exports = {
+            entry: ['./src/app.js'],    // or main.js, or index.js, whatever.js
+            output: {
+                path: __dirname + '/build/js',
+                filename: 'bundle.js',
+                publicPath: '/js/'
+            }
+        };
+
+  section
+    h2 But bundling pngs and css, really?
+    pre
+      code.hljs.javascript.
+
+        //yes, we require sass!
+        require('./mySassForThisModule.scss');
+
+        var _ = require('lodash');
+        var FooComponent = require('./FooComponent.jsx');
+
+        //yes, we require png!
+        var imageLink = require('../../img/myImage.png');
+
+        // do something with imageLink, FooComponent and lodash
+
+        module.exports = ThisModule;
+    p.
+      If you bundle this with webpack, all the assets will be automagically
+      available when you include your bundle into your html document.
+
+  section
+    h2 Loaders
+    blockquote(cite="http://webpack.github.io/docs/loaders.html").
+      Loaders are transformations that are applied on files. They preprocess files.
+      For instance they can transform CoffeeScript to JavaScript.
+    p.
+      Instead of having to do a script procedure or extend gulp/grunt,
+      you install a Loader, specific for that type of file, and then
+      you either use it in your js or define it globally through
+      the <code>webpack.config.js</code>
+
+  section
+    h2 Lots of Loaders (via npm)
+    ul
+      li Inlining stylesheets
+      li Various preprocessors (jsx, CoffeeScript, es6, typescript)
+      li templates
+      li files, jsons, source-maps
+      li promises, webworkers
+
+  section
+    h2 Loader Configuration
+    pre(style="margin-left: -10%; width:120%; font-size: 0.45em;")
+      code.hljs.javascript.
+        // ------------------
+        // webpack.config.js
+        // ------------------
+        ...,
+        module: {
+            loaders: [
+                {
+                    test: /\.js.{0,1}$/,
+                    loader: 'jsx?harmony'
+                },{
+                    test: /\.scss$/,
+                    loader: "style!css!sass?outputStyle=expanded&includePaths[]=" + __dirname + '/src/scss'
+                }, {
+                    test: /\.css$/,
+                    loader: "style!css"
+                }
+            ],
+        },
+        ...
+
+
+  section
+    h2 Loaders are awesome
+    ul
+      li Requiring and inlining stylesheets is super helpful.
+      li You get all the freedom you need with preprocessors.
+      li You can do cool stuff like inlining small pngs or json files.
+      li Use Grunt/Gulp for really complex requirements, keep simple stuff simple.
+
+  section
+    h2 What would replace the Gruntfile?
+    pre(style="width:100%; font-size: 0.40em;")
+      code(style="max-height: 100%;").hjs.javascript.
+        // ------------------
+        // webpack.config.js
+        // ------------------
+
+        // webpack.config.js
+           module.exports = {
+               entry: [
+                   './src/main.js'
+               ],
+               output: {
+                   path: __dirname + '/dist',
+                   filename: 'bundle.js',
+                   publicPath: 'dist/'
+               },
+               module: {
+                   loaders: [
+                       { test: require.resolve("jquery"), loader: "imports?jQuery=jquery" },
+                       { test: /\.jade$/, loader: "html!jade-html"},
+                       { test: /\.css$/, loader: "style!css"},
+                       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
+                       { test: /\.scss$/, loaders: ["style", "css", "sass"] }
+                   ],
+               },
+               resolve: {
+                   extensions: ['', '.js', '.jade']
+               },
+               plugins: [
+                   new webpack.ProvidePlugin({
+                       $: "jquery",
+                       jQuery: "jquery"
+                   })
+               ]
+           };
+
+  section
+    h2 And load extra stuff on the main.js
+    pre
+      code(style="max-height: 100%;").hjs.javascript.
+        // ------------------
+        // main.js
+        //
+        "use strict";
+        // Bootstrap includes
+        // Tooltip requires Tether
+        require('script!tether/dist/js/tether.min.js');
+        require('bootstrap-loader');
+
+        // Entry point for Utilities
+        require('./util/main.js');
+
+        // Entry point for Modules used across the site
+        // Audio Player would be a good example
+        require('./modules/main.js');
+
+        // Entry point for Pages
+        require('./pages/main.js');
+
+  section
+    h2 Load on Demand
+    p Create split points
+    pre
+      code.hljs.javascript.
+
+        require.ensure(["./otherPart.js"], function (otherPart) {
+            // now you can use otherPart
+        });
+
+    p.
+      This will create two files (called chunks by Webpack).
+      One is your entrypoint, the other gets loaded on demand.
+
+
+  section
+
+    h2 Multiple Entrypoints
+
+    p Run the CommonsChunkPlugin to split code up
+
+    pre
+      code.hljs.javascript.
+        {
+            entry: { a: "./a", b: "./b" },
+            output: { filename: "[name].js" },
+            plugins: [ new webpack.CommonsChunkPlugin("common.js") ]
+        }
+
+
+  section
+
+    h2 Caching
+
+    p Add hashes to your filenames
+
+    pre
+      code.hljs.javascript.
+        output: {
+            path: path.join(__dirname, "assets", "[hash]"),
+            publicPath: "assets/[hash]/",
+            filename: "output.[hash].bundle.js",
+            chunkFilename: "[id].[hash].bundle.js"
+        }
+
+
+  section
+    h2 There is more
+    ul
+      li uglify
+      li dedupe
+      li various chunk optimizations (max chunk count, min chunk size)
+      li gulp/grunt
+      li target various runtimes
+
+  section
+    h2 Development productivity
+
+  section
+    h2 webpack-dev-server
+    p Incremental (=instant) rebuilds
+    p hot reload without plugins
+
+  section
+    h2 dev-server setup
+    .container
+      .row(style="width:110%; margin-left: -5%;")
+        .col-md-6
+          pre(style="width:100%; font-size: 0.40em;")
+            code(style="max-height: 100%;").hljs.javascript.
+              // ------------------
+              // server.js
+              // ------------------
+              "use strict";
+              var webpack = require('webpack');
+              var WebpackDevServer = require('webpack-dev-server');
+              var config = require('./webpack.config');
+
+              var server = new WebpackDevServer(webpack(config), {
+                  // webpack-dev-server options
+                  hot: true,
+                  contentBase: __dirname,
+                  quiet: false,
+                  noInfo: false,
+                  publicPath: '/js/',
+                  stats: { colors: true }
+              });
+
+              server.listen(8081, "localhost", function() {});
+        .col-md-6
+          pre(style="width:100%; font-size: 0.40em; margin-left: 5px;")
+            code(style="max-height: 100%;").hljs.javascript.
+              // ------------------
+              // webpack.config.js
+              // ------------------
+              entry: [
+                  './slides-loader.js',
+                  'webpack/hot/dev-server',
+                  'webpack-dev-server/client?http://localhost:8081'
+              ],
+              plugins: [new webpack.HotModuleReplacementPlugin()],
+  section
+    h2 Further Reading
+    li
+      a(href="http://webpack.github.io/docs/") http://webpack.github.io/docs/
+      span  (especially list of tutorials)
+    li
+      a(href="https://github.com/petehunt/webpack-howto").
+        https://github.com/petehunt/webpack-howto
+  section
+    h2 Wrap-Up
+    ul
+      li Good bundling is important (and easier than server-side rendering)
+      li Webpack combines the strengths of RequireJS and Browserify
+      li Webpack is a bundler for everbody
+      li It is easy to migrate
+      li Webpack is well supported (because of the cool kids)

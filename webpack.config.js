@@ -18,6 +18,20 @@ module.exports = {
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
       { test: /\.scss$/, loaders: ["style", "css", "sass"] }
     ],
+    postLoaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/, // do not lint third-party code
+        loader: 'jshint-loader'
+      }
+    ],
+    jshint: {
+      // Display JSHint messages as webpack errors
+      emitErrors: true,
+
+      // fail the build on JSHInt errors
+      failOnHint: false,
+    }
   },
   resolve: {
     extensions: ['', '.js', '.jade']
